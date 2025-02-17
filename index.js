@@ -1,6 +1,7 @@
 const express = require('express');
 const env = require('dotenv');
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes');
 
 env.config();
 const app = express();
@@ -23,6 +24,8 @@ const connectDb = () => {
 }
 
 connectDb();
+
+app.use('/api/v1', userRoutes);
 
 
 port = process.env.PORT
