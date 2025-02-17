@@ -29,6 +29,9 @@ const userSchema = new schema({
     role: {
         type: String,
         default: ROLES.USER
+    },
+    refreshToken: {
+        type: String,
     }
 })
 
