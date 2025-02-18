@@ -2,6 +2,7 @@ const express = require('express');
 const env = require('dotenv');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
+const movieRoutes = require('./routes/movieRoutes');
 
 env.config();
 const app = express();
@@ -31,6 +32,7 @@ app.use(cookieParser());
 
 
 app.use('/api/v1', userRoutes);
+app.use('/api/v1', movieRoutes);
 
 
 port = process.env.PORT
