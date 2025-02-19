@@ -3,6 +3,8 @@ const env = require('dotenv');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const movieRoutes = require('./routes/movieRoutes');
+const cinemaRoutes = require('./routes/cinemaRoutes');
+const screeningRoutes = require('/Users/mac/movie_detailing_api/routes/screnningRoutes.js');
 
 env.config();
 const app = express();
@@ -33,6 +35,8 @@ app.use(cookieParser());
 
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', movieRoutes);
+app.use('/api/v1', cinemaRoutes);
+app.use('/api/v1', screeningRoutes);
 
 
 port = process.env.PORT

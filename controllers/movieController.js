@@ -1,4 +1,5 @@
 const Movie = require("/Users/mac/movie_detailing_api/models/movieModel.js") // Adjust based on your project structure
+const mongoose = require('mongoose');
 
 // Get all movies excluding the ones that are soft deleted
 // exports.getAllMovies = async (req, res) => {
@@ -20,6 +21,8 @@ const Movie = require("/Users/mac/movie_detailing_api/models/movieModel.js") // 
 //Get all movies including the ones that are soft deleted
 exports.getAllMovies = async (req, res) => {
     try {
+        console.log(mongoose.modelNames());
+
         const movies = await Movie.find(); // Fetch all movies
         res.status(200).json({
             status: 'success',
@@ -43,6 +46,13 @@ exports.addMovie = async (req, res) => {
             return res.status(400).json({
                 status: 'fail',
                 message: 'Please provide title, description, and rating'
+            });
+        }
+        const existingMovie = await Movie.findOne({ title: body.title });
+        if (existingMovie) {
+            return res.status(400).json({
+                status: 'fail',
+                message: 'Movie with this title already exists'
             });
         }
         const movie = await Movie.create({ ...body }); 

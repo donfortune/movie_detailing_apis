@@ -27,7 +27,13 @@ exports.createUser = async (req, res) => {
                 message: 'Please provide name, email, and password'
             });
         }
-
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({
+                status: 'fail',
+                message: 'User with this email already exists'
+            });
+        }
         // Create the user (password will be hashed automatically by the schema)
         const newUser = await User.create({ name, email, password });
 
