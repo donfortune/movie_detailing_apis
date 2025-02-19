@@ -81,3 +81,28 @@ exports.getHighestGrossingScreening = async (req, res) => {
     }
 }
 
+exports.getMoviePerformance = async (req, res) => {
+    try {
+        const { movieId } = req.params;
+        if (!movieId) {
+            return res.status(400).json({
+                status: 'fail',
+                message: 'Please provide movieId'
+            });
+        }
+        const screenings = await Screening.find({ movieId }).sort({ showTime: -1 });
+        if (screenings.length === 0) {
+            return res.status(404).json({
+                status: 'fail',
+                message: 'No screenings found'
+            });
+        }
+        res.status(200).json({
+            status: 'success',
+            data: screenings
+        });
+    } catch (error) {
+        
+    }
+}
+
