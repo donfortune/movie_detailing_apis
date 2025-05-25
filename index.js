@@ -9,7 +9,7 @@ const screeningRoutes = require('/Users/mac/movie_detailing_api/routes/screnning
 env.config();
 const app = express();
 
-app.use(express.json()); // to parse the incoming request with JSON payloads
+app.use(express.json()); // to parse the incoming request with JSOn 
 
 const connectDb = () => {
     try {
